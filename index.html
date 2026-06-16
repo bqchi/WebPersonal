@@ -401,8 +401,7 @@ body.light-mode .visitor-counter:hover {
                     <p class="text-justify text-gray-400 text-sm mb-6">Dashboard que geolocaliza población de obra social.</p> 
                     <p class="text-justify text-gray-400 text-sm mb-6">Identifica densidad de afiliados para optimizar contratación de servicios y detectar zonas sin cobertura. Se produce a partir de un extracto del sistema de la empresa. Luego de normalizarse los datos, se utiliza un script de Python para Generar coordenadas y representar los datos en un mapa de Argentina.</p>
                     <div class="flex gap-3 mt-auto">
-                        <a href="https://raw.githubusercontent.com/bqchi/WebPersonal/main/assets/demos/demo-mapaafiliados.mp4" class="text-xs font-semibold bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded transition">Demo</a>
-                        
+                        <button onclick="openVideoModal('https://raw.githubusercontent.com/bqchi/WebPersonal/main/assets/demos/demo-mapaafiliados.mp4')" class="text-xs font-semibold bg-emerald-500 hover:bg-emerald-600 text-white px-3 py-1.5 rounded transition" style="border: none; cursor: pointer;">Demo</button>
                     </div>
                 </div>
 
@@ -641,6 +640,23 @@ body.light-mode .visitor-counter:hover {
         // Traducir automáticamente si el usuario tiene inglés guardado
         if (currentLanguage === 'en') {
             translatePage('en');
+        }
+
+                // ========== MODAL PARA VIDEOS ==========
+        function openVideoModal(videoUrl) {
+            const modal = document.createElement('div');
+            modal.innerHTML = `
+                <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: flex; align-items: center; justify-content: center; z-index: 2000; cursor: pointer;" onclick="this.remove()">
+                    <div style="position: relative; width: 90%; max-width: 1200px; cursor: default;" onclick="event.stopPropagation()">
+                        <button onclick="this.parentElement.parentElement.remove()" style="position: absolute; top: -40px; right: 0; background: none; border: none; color: white; font-size: 28px; cursor: pointer; font-weight: bold;">✕</button>
+                        <video width="100%" controls autoplay style="border-radius: 8px;">
+                            <source src="${videoUrl}" type="video/mp4">
+                            Tu navegador no soporta videos HTML5
+                        </video>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
         }
     </script>
 
